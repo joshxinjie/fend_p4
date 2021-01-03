@@ -1,3 +1,5 @@
+sentimentData = {};
+
 var path = require('path')
 const express = require('express')
 const mockAPIResponse = require('./mockAPI.js')
@@ -42,33 +44,38 @@ app.get('/test', function (req, res) {
     res.send(mockAPIResponse)
 })
 
-app.post('/inferTextSentiment', inferTextSentiment);
-function inferTextSentiment(request, response) {
+app.post('/inferNewsSentiment', inferNewsSentiment);
+function inferNewsSentiment(request, response) {
     let inputText = request.body;
     console.log('Input Text: ', inputText)
 
     try {
-        const sentimentData = fetchTextSentiment(inputText);
-        // sentimentAnalysis = JSON.stringify(sentimentData);
-        response.send(sentimentData);
+        const newsSentiment = fetchNewsSentiment(inputText);
+        // sentimentAnalysis = JSON.stringify(newsSentiment);
+        response.send(newsSentiment);
     } catch(error) {
         console.log("error", error);
     }
 };
 
-const fetchTextSentiment = async(textJson) => {
+const fetchNewsSentiment = async(textJson) => {
     // URL encode text, e.g. replace spaces with %20
     encodedText = encodeURIComponent(textJson.inputText.trim());
-    console.log(encodedText);
     apiCallURL = `${Base_URL}?key=${apiKey}&of=json&txt=${encodedText}&model=general&lang=en`;
-    console.log(apiCallURL);
 
     try {
         const response = await fetch(apiCallURL);
         const data = await response.json();
         console.log(data);
+        sentimentData = data;
         return data;
     } catch(error) {
         console.log("error", error);
     }
+};
+
+app.get('/getNewsSentiment', getNewsSentiment);
+function getNewsSentiment(request, response) {
+    console.log('Sending Data: ', sentimentData);
+    response.send(sentimentData);
 };

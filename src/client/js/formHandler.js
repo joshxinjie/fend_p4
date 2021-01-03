@@ -15,7 +15,8 @@ function handleSubmit(event) {
     // })
 
     // get the text from the form field
-    postNews('http://localhost:8088/inferTextSentiment', {inputText: formText});
+    postNews('http://localhost:8088/inferNewsSentiment', {inputText: formText})
+    .then(() => updateUI());
 }
 
 const postNews = async(url='', data={}) => {
@@ -32,6 +33,21 @@ const postNews = async(url='', data={}) => {
         const newData = await response.json();
         console.log(newData);
         return newData;
+    } catch(error) {
+        console.log("error", error);
+    }
+};
+
+const updateUI = async() => {
+    const request = await fetch('http://localhost:8088/getNewsSentiment');
+
+    try {
+        const allData = await request.json();
+        document.getElementById('sentiment').innerHTML = `Sentiment: ${allData.score_tag}`;
+        document.getElementById('agreement').innerHTML = `Agreement: ${allData.agreement}`;
+        document.getElementById('subjectivity').innerHTML = `Subjectivity: ${allData.subjectivity}`;
+        document.getElementById('irony').innerHTML = `Irony: ${allData.irony}`;
+        document.getElementById('confidence').innerHTML = `Confidence: ${allData.confidence}`;
     } catch(error) {
         console.log("error", error);
     }
