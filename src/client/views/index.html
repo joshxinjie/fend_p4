@@ -23,8 +23,15 @@
 
         <main>
             <section>
+                <div class="select-format" style="width:200px;">
+                    <select>
+                        <option value="0">Select news format:</option>
+                        <option value="1">URL</option>
+                        <option value="2">Text</option>
+                    </select>
+                </div>
                 <form class="" onsubmit="return Client.handleSubmit(event)">
-                    <input id="name" type="text" name="input" value="" placeholder="Name">
+                    <input id="input" type="text" name="input" value="" placeholder="URL or Text">
                     <input type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)" onsubmit="return Client.handleSubmit(event)">
                 </form>
             <section>

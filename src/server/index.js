@@ -51,8 +51,10 @@ function inferNewsSentiment(request, response) {
 
     try {
         const newsSentiment = fetchNewsSentiment(inputText);
-        // sentimentAnalysis = JSON.stringify(newsSentiment);
-        response.send(newsSentiment);
+        console.log("Sentiment API", newsSentiment);
+        newsSentimentString = JSON.stringify(newsSentiment);
+        console.log("Sending Data", newsSentimentString);
+        response.send(newsSentimentString);
     } catch(error) {
         console.log("error", error);
     }
@@ -63,10 +65,11 @@ const fetchNewsSentiment = async(textJson) => {
     encodedText = encodeURIComponent(textJson.inputText.trim());
     apiCallURL = `${Base_URL}?key=${apiKey}&of=json&txt=${encodedText}&model=general&lang=en`;
 
+    const response = await fetch(apiCallURL);
+
     try {
-        const response = await fetch(apiCallURL);
         const data = await response.json();
-        console.log(data);
+        console.log("Fetched", data);
         sentimentData = data;
         return data;
     } catch(error) {
@@ -76,6 +79,7 @@ const fetchNewsSentiment = async(textJson) => {
 
 app.get('/getNewsSentiment', getNewsSentiment);
 function getNewsSentiment(request, response) {
-    console.log('Sending Data: ', sentimentData);
+    // console.log('Sending Data: ', sentimentData);
     response.send(sentimentData);
+    sentimentData = {};
 };

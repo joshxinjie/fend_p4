@@ -2,7 +2,7 @@ function handleSubmit(event) {
     event.preventDefault()
 
     // check what text was put into the form field
-    let formText = document.getElementById('name').value
+    let formText = document.getElementById('input').value
     
     // Client.checkForName(formText)
 
@@ -14,9 +14,12 @@ function handleSubmit(event) {
     //     document.getElementById('results').innerHTML = res.message
     // })
 
+    // Check which box is selected, then run appropriate postNews function, each one using a seperate domain for different api calls
+    // There will be 2 postNews function, one for URL, one for text
+
     // get the text from the form field
     postNews('http://localhost:8088/inferNewsSentiment', {inputText: formText})
-    .then(() => updateUI());
+    .then(response => updateUI(response));
 }
 
 const postNews = async(url='', data={}) => {
@@ -31,26 +34,38 @@ const postNews = async(url='', data={}) => {
 
     try {
         const newData = await response.json();
-        console.log(newData);
+        console.log("New Data", newData);
         return newData;
     } catch(error) {
         console.log("error", error);
     }
 };
 
-const updateUI = async() => {
-    const request = await fetch('http://localhost:8088/getNewsSentiment');
-
+function updateUI(data) {
     try {
-        const allData = await request.json();
-        document.getElementById('sentiment').innerHTML = `Sentiment: ${allData.score_tag}`;
-        document.getElementById('agreement').innerHTML = `Agreement: ${allData.agreement}`;
-        document.getElementById('subjectivity').innerHTML = `Subjectivity: ${allData.subjectivity}`;
-        document.getElementById('irony').innerHTML = `Irony: ${allData.irony}`;
-        document.getElementById('confidence').innerHTML = `Confidence: ${allData.confidence}`;
+        document.getElementById('sentiment').innerHTML = `Sentiment: ${data.score_tag}`;
+        document.getElementById('agreement').innerHTML = `Agreement: ${data.agreement}`;
+        document.getElementById('subjectivity').innerHTML = `Subjectivity: ${data.subjectivity}`;
+        document.getElementById('irony').innerHTML = `Irony: ${data.irony}`;
+        document.getElementById('confidence').innerHTML = `Confidence: ${data.confidence}`;
     } catch(error) {
         console.log("error", error);
     }
-};
+}
+
+// const updateUI = async() => {
+//     const request = await fetch('http://localhost:8088/getNewsSentiment');
+
+//     try {
+//         const allData = await request.json();
+//         document.getElementById('sentiment').innerHTML = `Sentiment: ${allData.score_tag}`;
+//         document.getElementById('agreement').innerHTML = `Agreement: ${allData.agreement}`;
+//         document.getElementById('subjectivity').innerHTML = `Subjectivity: ${allData.subjectivity}`;
+//         document.getElementById('irony').innerHTML = `Irony: ${allData.irony}`;
+//         document.getElementById('confidence').innerHTML = `Confidence: ${allData.confidence}`;
+//     } catch(error) {
+//         console.log("error", error);
+//     }
+// };
 
 export { handleSubmit };
