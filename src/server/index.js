@@ -11,7 +11,7 @@ dotenv.config();
 
 const apiKey = process.env.API_KEY;
 const app = express()
-const port = 8088;
+const port = 8089;
 
 /* Middleware*/
 //Here we are configuring express to use body-parser as middle-ware.
@@ -50,27 +50,25 @@ function inferNewsSentiment(request, response) {
     console.log('Input Text: ', inputText)
 
     try {
-        const newsSentiment = fetchNewsSentiment(inputText);
-        console.log("Sentiment API", newsSentiment);
-        newsSentimentString = JSON.stringify(newsSentiment);
-        console.log("Sending Data", newsSentimentString);
-        response.send(newsSentimentString);
+        const newsSentiment = fetchNewsSentiment(inputText, response);
     } catch(error) {
         console.log("error", error);
     }
 };
 
-const fetchNewsSentiment = async(textJson) => {
+const fetchNewsSentiment = async(textJson, response) => {
     // URL encode text, e.g. replace spaces with %20
     encodedText = encodeURIComponent(textJson.inputText.trim());
     apiCallURL = `${Base_URL}?key=${apiKey}&of=json&txt=${encodedText}&model=general&lang=en`;
 
-    const response = await fetch(apiCallURL);
+    const res = await fetch(apiCallURL);
 
     try {
-        const data = await response.json();
+        const data = await res.json();
         console.log("Fetched", data);
         sentimentData = data;
+        response.send(sentimentData);
+        console.log("Sending Data", sentimentData);
         return data;
     } catch(error) {
         console.log("error", error);

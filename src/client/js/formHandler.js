@@ -18,7 +18,7 @@ function handleSubmit(event) {
     // There will be 2 postNews function, one for URL, one for text
 
     // get the text from the form field
-    postNews('http://localhost:8088/inferNewsSentiment', {inputText: formText})
+    postNews('http://localhost:8089/inferNewsSentiment', {inputText: formText})
     .then(response => updateUI(response));
 }
 
