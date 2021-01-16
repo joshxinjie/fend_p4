@@ -11,7 +11,7 @@ dotenv.config();
 
 const apiKey = process.env.API_KEY;
 const app = express()
-const port = 8089;
+const port = 8088;
 
 /* Middleware*/
 //Here we are configuring express to use body-parser as middle-ware.
@@ -44,28 +44,48 @@ app.get('/test', function (req, res) {
     res.send(mockAPIResponse)
 })
 
-app.post('/inferNewsSentiment', inferNewsSentiment);
-function inferNewsSentiment(request, response) {
-    let inputText = request.body;
-    console.log('Input Text: ', inputText)
+app.post('/inferNewsSentimentURL', inferNewsSentimentURL);
+function inferNewsSentimentURL(request, response) {
+    let url = request.body;
+    // console.log('URL: ', url)
 
     try {
-        const newsSentiment = fetchNewsSentiment(inputText, response);
+        const newsSentiment = fetchNewsSentiment(url, response, 1);
     } catch(error) {
         console.log("error", error);
     }
 };
 
-const fetchNewsSentiment = async(textJson, response) => {
+app.post('/inferNewsSentimentText', inferNewsSentimentText);
+function inferNewsSentimentText(request, response) {
+    let inputText = request.body;
+    // console.log('Input Text: ', inputText)
+
+    try {
+        const newsSentiment = fetchNewsSentiment(inputText, response, 2);
+    } catch(error) {
+        console.log("error", error);
+    }
+};
+
+const fetchNewsSentiment = async(text, response, format) => {
     // URL encode text, e.g. replace spaces with %20
-    encodedText = encodeURIComponent(textJson.inputText.trim());
-    apiCallURL = `${Base_URL}?key=${apiKey}&of=json&txt=${encodedText}&model=general&lang=en`;
+    if (format == 1) {
+        let url = text.inputText;
+        apiCallURL = `https://api.meaningcloud.com/sentiment-2.1?key=${apiKey}&lang=en&url=${url}`
+    } else if (format == 2) {
+        // URL encode text, e.g. replace spaces with %20
+        encodedText = encodeURIComponent(text.inputText.trim());
+        apiCallURL = `${Base_URL}?key=${apiKey}&of=json&txt=${encodedText}&model=general&lang=en`;
+    } else {
+        throw {name : "NotImplementedError", message : "News format is not implemented"}; 
+    };
 
     const res = await fetch(apiCallURL);
 
     try {
         const data = await res.json();
-        console.log("Fetched", data);
+        // console.log("Fetched", data);
         sentimentData = data;
         response.send(sentimentData);
         console.log("Sending Data", sentimentData);

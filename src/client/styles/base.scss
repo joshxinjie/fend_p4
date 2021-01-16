@@ -1,14 +1,90 @@
+$main-color: #F0F8FF;
+$pacific-blue-dark:  #003242;
+$pacific-blue-light: #006282;
+
 body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-}
 
-main {
-    flex: 2;
-}
+    main {
+        flex: 2;
+        background: $main-color;
 
-section {
-    max-width: 800px;
-    margin: 50px auto;
+        section {
+            max-width: 800px;
+            margin: 50px auto;
+
+            #input {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                height: 200px;
+                width: 600px;
+                font-family: Roboto;
+            }
+
+            .format-select-box {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 15px;
+                width: 160px;
+        
+                #selected-format {
+                    font-family: Roboto;
+                    // width: 80%;
+                    // max-width: 80%;
+                    background: #006282;
+                    color: $main-color;
+                }
+            }
+
+            .submit {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 10px;
+                width: 200px;
+
+                #submit-button {
+                    // border-radius: 10%;
+                    background: #003242;
+                    color:$main-color;
+                    font-family: Permanent Marker;
+                }
+            }
+
+            .results-card {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+                transition: 0.3s;
+                border-radius: 5px;
+                width: 500px;
+                height: 300px;
+                background: $pacific-blue-light;
+                color: $main-color;
+
+                p {
+                    font-family: Roboto;
+                    font-size: 20px;
+                    text-align: center;
+                    padding-top: 10px;
+                    margin-bottom: 5px;
+                }
+
+                div {
+                    margin-top: 1px;
+                    margin-left: 15px;
+                }
+
+                span {
+                    color: #DE5D83;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
 }

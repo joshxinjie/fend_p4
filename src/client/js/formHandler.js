@@ -1,3 +1,14 @@
+const port = 8088;
+
+const sentimentValues = {
+    "P+": "strongly positive",
+    "P": "positive",
+    "NEU": "neutral",
+    "N": "negative",
+    "N+": "strongly negative",
+    "NONE": "none"
+}
+
 function handleSubmit(event) {
     event.preventDefault()
 
@@ -14,12 +25,21 @@ function handleSubmit(event) {
     //     document.getElementById('results').innerHTML = res.message
     // })
 
-    // Check which box is selected, then run appropriate postNews function, each one using a seperate domain for different api calls
-    // There will be 2 postNews function, one for URL, one for text
+    let newsFormat = document.getElementById("selected-format").value;
+    console.log("News Format: ", newsFormat);
 
-    // get the text from the form field
-    postNews('http://localhost:8089/inferNewsSentiment', {inputText: formText})
-    .then(response => updateUI(response));
+    if (newsFormat == 0) {
+        alert("Please select the news format!")
+    } else if (newsFormat == 1) {
+        // url
+        postNews(`http://localhost:${port}/inferNewsSentimentURL`, {inputText: formText})
+        .then(response => updateUI(response));
+    } else if (newsFormat == 2) {
+        postNews(`http://localhost:${port}/inferNewsSentimentText`, {inputText: formText})
+        .then(response => updateUI(response));
+    } else {
+        throw {name : "NotImplementedError", message : "News format is not implemented"};
+    };
 }
 
 const postNews = async(url='', data={}) => {
@@ -43,29 +63,15 @@ const postNews = async(url='', data={}) => {
 
 function updateUI(data) {
     try {
-        document.getElementById('sentiment').innerHTML = `Sentiment: ${data.score_tag}`;
-        document.getElementById('agreement').innerHTML = `Agreement: ${data.agreement}`;
-        document.getElementById('subjectivity').innerHTML = `Subjectivity: ${data.subjectivity}`;
-        document.getElementById('irony').innerHTML = `Irony: ${data.irony}`;
-        document.getElementById('confidence').innerHTML = `Confidence: ${data.confidence}`;
+        document.getElementById('results-header').innerHTML = `<p>Analysis Results</p>`;
+        document.getElementById('sentiment').innerHTML = `<i class="fa fa-search"></i> The sentiment of the news is <span>${sentimentValues[data.score_tag]}</span>`;
+        document.getElementById('agreement').innerHTML = `<i class="fa fa-search"></i> The sentiments of the news' elements are in <span>${data.agreement.toLowerCase()}</span>`;
+        document.getElementById('subjectivity').innerHTML = `<i class="fa fa-search"></i> The news is <span>${data.subjectivity.toLowerCase()}</span>`;
+        document.getElementById('irony').innerHTML = `<i class="fa fa-search"></i> The news is <span>${data.irony.toLowerCase()}</span>`;
+        document.getElementById('confidence').innerHTML = `<i class="fa fa-search"></i> The model is <span>${data.confidence}%</span> confident about the results`;
     } catch(error) {
         console.log("error", error);
     }
-}
-
-// const updateUI = async() => {
-//     const request = await fetch('http://localhost:8088/getNewsSentiment');
-
-//     try {
-//         const allData = await request.json();
-//         document.getElementById('sentiment').innerHTML = `Sentiment: ${allData.score_tag}`;
-//         document.getElementById('agreement').innerHTML = `Agreement: ${allData.agreement}`;
-//         document.getElementById('subjectivity').innerHTML = `Subjectivity: ${allData.subjectivity}`;
-//         document.getElementById('irony').innerHTML = `Irony: ${allData.irony}`;
-//         document.getElementById('confidence').innerHTML = `Confidence: ${allData.confidence}`;
-//     } catch(error) {
-//         console.log("error", error);
-//     }
-// };
+};
 
 export { handleSubmit };

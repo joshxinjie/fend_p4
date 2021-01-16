@@ -1,5 +1,23 @@
+$header-color: #003242;
+$title-color: white;
+$header-font: Permanent Marker;
+
 header {
     display: flex;
     justify-content: space-between;
     padding: 10px 40px;
+    background: $header-color;
+
+    .title {
+        text-align: center;
+        color: $title-color;
+        font-family: $header-font;
+        font-size: 30px;
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
+    
+    .nav {
+        text-align: right;
+    }
 }
