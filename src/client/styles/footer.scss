@@ -1,10 +1,43 @@
+$main-color: white;
+$pacific-blue-dark:  #003242;
+$normal-font: Roboto;
+
 footer {
-    background: #003242;
+    display: inline-block;
+    background: $pacific-blue-dark;
+    text-align: center;
 
     p {
-        font: Roboto;
-        font-size: 20px;
-        margin: 15px;
-        color: white;
+        display: inline-block;
+        font: $normal-font;
+        font-size: 25px;
+        margin-top: 15px;
+        margin-right: 2px;
+        margin-left: 15px;
+        margin-bottom: 15px;
+        vertical-align: middle;
+        color: $main-color;
+    }
+
+    .contact-links {
+        display: inline-block;
+        list-style-type: none;
+
+        li {
+            display: inline-block;
+        }
+
+        .contact-img-link {
+            height: 25px;
+            width: 25px;
+            margin-left: 3px;
+            margin-right: 3px;
+            margin-top: 0px;
+            vertical-align: middle;
+
+            &:hover {
+                opacity: 0.4;
+            }
+        }
     }
 }

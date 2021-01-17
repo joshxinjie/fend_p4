@@ -1,6 +1,8 @@
 $main-color: #F0F8FF;
 $pacific-blue-dark:  #003242;
 $pacific-blue-light: #006282;
+$fancy-font: Permanent Marker;
+$normal-font: Roboto;
 
 body {
     display: flex;
@@ -21,7 +23,7 @@ body {
                 margin-right: auto;
                 height: 200px;
                 width: 600px;
-                font-family: Roboto;
+                font-family: $normal-font;
             }
 
             .format-select-box {
@@ -32,10 +34,10 @@ body {
                 width: 160px;
         
                 #selected-format {
-                    font-family: Roboto;
+                    font-family: $normal-font;
                     // width: 80%;
                     // max-width: 80%;
-                    background: #006282;
+                    background: $pacific-blue-light;
                     color: $main-color;
                 }
             }
@@ -49,9 +51,9 @@ body {
 
                 #submit-button {
                     // border-radius: 10%;
-                    background: #003242;
+                    background: $pacific-blue-dark;
                     color:$main-color;
-                    font-family: Permanent Marker;
+                    font-family: $fancy-font;
                 }
             }
 
@@ -68,7 +70,7 @@ body {
                 color: $main-color;
 
                 p {
-                    font-family: Roboto;
+                    font-family: $normal-font;
                     font-size: 20px;
                     text-align: center;
                     padding-top: 10px;
