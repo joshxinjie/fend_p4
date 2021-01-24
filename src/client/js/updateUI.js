@@ -20,4 +20,4 @@ function updateUI(data) {
     }
 };
 
-export { updateUI };
+export { updateUI, sentimentValues };
