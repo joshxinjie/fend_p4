@@ -1,5 +1,5 @@
 // import { checkForName } from './js/nameChecker'
-import { handleSubmit, getURLNewsSentiment, getTextNewsSentiment } from './js/formHandler'
+import { handleSubmit } from './js/formHandler'
 import { updateUI } from "./js/updateUI";
 
 // console.log(checkForName);
@@ -12,4 +12,4 @@ import "./styles/form.scss"
 import "./styles/header.scss"
 import "./styles/resets.scss"
 
-export { handleSubmit, getURLNewsSentiment, getTextNewsSentiment, updateUI };
+export { handleSubmit, updateUI };

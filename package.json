@@ -36,7 +36,8 @@
     "sass-loader": "^10.1.0",
     "style-loader": "^2.0.0",
     "terser-webpack-plugin": "^4.2.3",
-    "webpack-dev-server": "^3.7.2"
+    "webpack-dev-server": "^3.7.2",
+    "workbox-webpack-plugin": "^6.0.2"
   },
   "engines": {
     "node": "14.15.1"
