@@ -1,8 +1,5 @@
-// import { checkForName } from './js/nameChecker'
 import { handleSubmit } from './js/formHandler'
 import { updateUI } from "./js/updateUI";
-
-// console.log(checkForName);
 
 console.log("CHANGE!!");
 

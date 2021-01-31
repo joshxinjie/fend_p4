@@ -35,7 +35,7 @@ The Aylien API is perhaps different than what you've used before. It has you ins
 First, you will need to go [here](https://developer.aylien.com/signup). Signing up will get you an API key. Don't worry, at the time of this course, the API is free to use up to 1000 requests per day or 333 intensive requests. It is free to check how many requests you have remaining for the day.
 
 ### Step 2: Install the SDK
-Next you'll need to get the SDK. SDK stands for Software Development Kit, and SDKs are usually a program that brings together various tools to help you work with a specific technology. SDKs will be available for all the major languages and platforms, for instance the Aylien SDK brings together a bunch of tools and functions that will make it possible to interface with their API from our server and is available for Node, Python, PHP, Go, Ruby and many others. We are going to use the Node one, the page is available [here](https://docs.aylien.com/textapi/sdks/#sdks). You get 1000 free requests per day. 
+Next you'll need to get the SDK. SDK stands for Software Development Kit, and SDKs are usually a program that brings together various tools to help you work with a specific technology. SDKs will be available for all the major languages and platforms, for instance the Aylien SDK brings together a bunch of tools and functions that will make it possible to interface with their API from our server and is available for Node, Python, PHP, Go, Ruby and many others. We are going to use the Node one, the page is available [here](https://docs.aylien.com/textapi/sdks/#sdks). You get 1000 free requests per day.
 
 ### Step 3: Require the SDK package
 Install the SDK in your project and then we'll be ready to set up your server/index.js file.
@@ -99,10 +99,52 @@ I won't provide further examples here, as it's up to you to create the various r
 Once you are hooked up to the Aylien API, you are most of the way there! Along with making sure you are following all the requirements in the project rubric in the classroom, here are a few other steps to make sure you take.
 
 - Parse the response body to dynamically fill content on the page.
-- Test that the server and form submission work, making sure to also handle error responses if the user input does not match API requirements. 
-- Go back to the web pack config and add the setup for service workers.  
-- Test that the site is now available even when you stop your local server 
+- Test that the server and form submission work, making sure to also handle error responses if the user input does not match API requirements.
+- Go back to the web pack config and add the setup for service workers. 
+- Test that the site is now available even when you stop your local server
 
 ## Deploying
 
 A great step to take with your finished project would be to deploy it! Unfortunately its a bit out of scope for me to explain too much about how to do that here, but checkout [Netlify](https://www.netlify.com/) or [Heroku](https://www.heroku.com/) for some really intuitive free hosting options.
+
+## How to Run
+
+### Install Project Dependencies
+
+Run the following command in a terminal in the root directory of the project
+
+```
+npm install
+```
+
+### Development Server
+
+Run the following command in a terminal in the root directory of the project
+
+```
+npm run build-dev
+```
+
+You will automatically be directed to a page at http://localhost:8086/
+
+### Production Server
+
+Run the following commands in a terminal in the root directory of the project
+
+```
+npm run build-prod
+```
+
+```
+npm start
+```
+
+Go to http://localhost:8088/
+
+### Test
+
+Run the following command in a terminal in the root directory of the project
+
+```
+npm run test
+```

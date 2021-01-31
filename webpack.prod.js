@@ -17,9 +17,7 @@ module.exports = {
         minimizer: [new TerserPlugin({}), new OptimizeCSSAssetsPlugin({})]
     },
     devServer: {
-        // host: 'localhost',
         port: 8088,
-        // localhost: 8088
     },
     module: {
         rules: [

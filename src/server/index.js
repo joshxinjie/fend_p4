@@ -69,7 +69,6 @@ function inferNewsSentimentText(request, response) {
 };
 
 const fetchNewsSentiment = async(text, response, format) => {
-    // URL encode text, e.g. replace spaces with %20
     if (format == 1) {
         let url = text.inputText;
         apiCallURL = `https://api.meaningcloud.com/sentiment-2.1?key=${apiKey}&lang=en&url=${url}`
