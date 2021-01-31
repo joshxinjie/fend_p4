@@ -25,14 +25,14 @@ app.use(cors());
 
 const fetch=require('node-fetch');
 
-// app.use(express.static('dist'))
-app.use(express.static('src/client'))
+app.use(express.static('dist'))
+// app.use(express.static('src/client'))
 
 console.log(__dirname)
 
 app.get('/', function (req, res) {
-    // res.sendFile('dist/index.html')
-    res.sendFile(path.resolve('src/client/views/index.html'))
+    res.sendFile(path.resolve('dist/index.html'))
+    // res.sendFile(path.resolve('src/client/views/index.html'))
 })
 
 // designates what port the app will listen to for incoming requests
