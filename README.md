@@ -127,6 +127,12 @@ npm run build-dev
 
 You will automatically be directed to a page at http://localhost:8086/
 
+In another terminal, run the command:
+
+```
+npm start
+```
+
 ### Production Server
 
 Run the following commands in a terminal in the root directory of the project
