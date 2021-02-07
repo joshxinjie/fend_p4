@@ -16,9 +16,9 @@ module.exports = {
     optimization: {
         minimizer: [new TerserPlugin({}), new OptimizeCSSAssetsPlugin({})]
     },
-    devServer: {
-        port: 8088,
-    },
+    // devServer: {
+    //     port: 8088,
+    // },
     module: {
         rules: [
             {
