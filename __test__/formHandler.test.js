@@ -1,6 +1,6 @@
 import { postNews } from "../src/client/js/formHandler";
 
-const port = process.env.PORT;
+const port = process.env.PORT || 8088;
 
 describe("Testing the inferNewsSentimentURL endpoint for postNewsFunction() function", () => { 
     test("Testing the postNewsFunction() function", () => {

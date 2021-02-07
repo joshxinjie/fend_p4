@@ -1,3 +1,7 @@
+# App URL
+ 
+ View deployed heroku app [here](https://nlpnewssentiment.herokuapp.com/)
+
 # Project Instructions
 
 This repo is your starter code for the project. It is the same as the starter code we began with in lesson 2. Install and configure Webpack just as we did in the course. Feel free to refer to the course repo as you build this one, and remember to make frequent commits and to create and merge branches as necessary!
@@ -153,4 +157,46 @@ Run the following command in a terminal in the root directory of the project
 
 ```
 npm run test
+```
+
+## Heroku Deployment
+
+1. In a terminal, log into Heroku:
+
+```
+heroku login
+```
+
+2. To link an existing repo to heroku app called `nlpnewssentiment` for the first time:
+
+```
+heroku git:remote - a nlpnewssentiment
+```
+
+or clone from existing heroku repo for `nlpnewssentiment` app:
+
+```
+heroku git:clone -a nlpnewssentiment
+cd nlpnewssentiment
+```
+
+3. To deploy changes:
+
+```
+git add .
+git commit -am "make it better"
+```
+
+Then do either 3a) or 3b)
+
+3a) If deploying from master branch
+
+```
+git push heroku master
+```
+
+3b) If deploying from `heroku-deploy` branch
+
+```
+git push heroku heroku-deploy:master
 ```
