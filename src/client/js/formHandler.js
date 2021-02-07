@@ -28,14 +28,20 @@ function getURLNewsSentiment(url) {
     if(!urlCheck.test(url)) {
         alert("Please enter a valid url that starts with http or https!")
     } else {
-        postNews(`http://localhost:${port}/inferNewsSentimentURL`, {inputText: url})
+        let postURL = window.location.origin + '/inferNewsSentimentURL';
+        postNews(postURL, {inputText: url})
         .then(response => Client.updateUI(response));
+        // postNews(`http://localhost:${port}/inferNewsSentimentURL`, {inputText: url})
+        // .then(response => Client.updateUI(response));
     }
 }
 
 function getTextNewsSentiment(text) {
-    postNews(`http://localhost:${port}/inferNewsSentimentText`, {inputText: text})
+    let postURL = window.location.origin + '/inferNewsSentimentText';
+    postNews(postURL, {inputText: text})
     .then(response => Client.updateUI(response));
+    // postNews(`http://localhost:${port}/inferNewsSentimentText`, {inputText: text})
+    // .then(response => Client.updateUI(response));
 }
 
 const postNews = async(url='', data={}) => {
