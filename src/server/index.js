@@ -11,7 +11,7 @@ dotenv.config();
 
 const apiKey = process.env.API_KEY;
 const app = express()
-const port = 8088;
+const port = process.env.PORT || 8088;
 
 /* Middleware*/
 //Here we are configuring express to use body-parser as middle-ware.

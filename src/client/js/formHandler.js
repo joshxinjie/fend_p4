@@ -1,4 +1,4 @@
-const port = 8088;
+const port = process.env.PORT || 8088;
 
 function handleSubmit(event) {
     event.preventDefault()
